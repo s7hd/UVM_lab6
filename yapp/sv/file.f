@@ -21,6 +21,11 @@
 ../../channel/sv/channel_if.sv
 ../../channel/sv/channel_pkg.sv
 
+# Multichannel components
+../../task1_integ/router_mcsequencer.sv
+../../task1_integ/router_mcseqs_lib.sv
+../../task1_integ/router_test_lib.sv
+
 # Main testbench files
 ../../yapp/sv/clkgen.sv   # Added clkgen.sv
 ../../task1_integ/yapp_router.sv
