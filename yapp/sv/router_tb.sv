@@ -35,14 +35,18 @@ class router_tb extends uvm_env;
 
     clk_rst = clock_and_reset_env::type_id::create("clk_rst", this);
 
-    // Create the multichannel sequencer
+    //create the multichannel sequencer
     mcseqr = router_mcsequencer::type_id::create("mcseqr", this);
-
-    // Bind HBUS and YAPP sequencers to multichannel sequencer
-    uvm_config_db#(uvm_sequencer_base)::set(this, "mcseqr.hbus_seqr", "", hbus.masters[0].m_sequencer);
-    uvm_config_db#(uvm_sequencer_base)::set(this, "mcseqr.yapp_seqr", "", yapp.agt.seqr);
   endfunction
+  
+function void connect_phase(uvm_phase phase);
+    super.connect_phase(phase);
+    `uvm_info("CONNECT", "Router testbench connect phase executing", UVM_HIGH)
 
+ mc_seqr.yapp_seqr = uvc0.agt.seqr;
+ mc_seqr.hbus_seqr = hbus.masters[0].sequencer;
+  
+ endfunction
   function void start_of_simulation_phase(uvm_phase phase);
     `uvm_info(get_type_name(), "start_of_simulation phase", UVM_HIGH)
   endfunction
